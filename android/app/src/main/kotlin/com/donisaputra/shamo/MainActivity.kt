@@ -1,4 +1,4 @@
-package com.example.shamo_mobile
+package com.donisaputra.shamo
 
 import io.flutter.embedding.android.FlutterActivity
 
