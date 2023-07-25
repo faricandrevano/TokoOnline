@@ -6,10 +6,7 @@ class MainAssets {
   static const _baseImagePath = 'assets/images';
 
   // Bitmap
-  static const backgroundImg = '$_baseImagePath/bitmap/background.webp';
-  static const splashLogoImg = '$_baseImagePath/bitmap/splash_logo.webp';
-  static const googleImg = '$_baseImagePath/bitmap/icon_google.webp';
-  static const bgLogoImg = '$_baseImagePath/bitmap/bg_logo.webp';
+  static const logoImg = '$_baseImagePath/bitmap/logo.png';
 
   // Icon
   static const logoIconImg = '$_baseImagePath/icons/ic_logo.webp';

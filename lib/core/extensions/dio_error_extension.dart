@@ -34,18 +34,18 @@ extension DioErrorExtension on DioException {
             );
         }
 
-      case DioErrorType.connectionTimeout:
-      case DioErrorType.sendTimeout:
-      case DioErrorType.receiveTimeout:
+      case DioExceptionType.connectionTimeout:
+      case DioExceptionType.sendTimeout:
+      case DioExceptionType.receiveTimeout:
         return TimeOutServerException(
           message: 'Connection timeout',
           code: response?.statusCode,
         );
 
-      case DioErrorType.cancel:
-      case DioErrorType.badCertificate:
-      case DioErrorType.connectionError:
-      case DioErrorType.unknown:
+      case DioExceptionType.cancel:
+      case DioExceptionType.badCertificate:
+      case DioExceptionType.connectionError:
+      case DioExceptionType.unknown:
         return GeneralServerException(
           message: 'A Server Error Occurred',
           code: response?.statusCode,

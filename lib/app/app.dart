@@ -59,7 +59,7 @@ class _AppWidget extends StatelessWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       navigatorObservers: [routeObserver],
       onGenerateRoute: route,
-      home: const Scaffold(),
+      home: const SplashPage(),
     );
   }
 }
