@@ -1,4 +1,5 @@
 import 'package:shamo_mobile/app/flavor.dart';
+import 'package:shamo_mobile/core/core.dart';
 
 class AppConfig {
   static const String appName = 'Airplane';
@@ -11,7 +12,7 @@ class AppConfig {
     dev: 'https://api.dev.example.com/v1',
     stag: 'https://api.stag.example.com/v1',
   );
-  static const AppTheme defaultTheme = AppTheme.light;
+  static const AppTheme defaultTheme = AppTheme.dark;
   static const bool autoStringifyEquatable = true;
   static const bool transparentStatusBar = true;
 }

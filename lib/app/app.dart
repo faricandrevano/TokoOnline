@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shamo_mobile/app/config.dart';
 import 'package:shamo_mobile/app/route.dart';
+import 'package:shamo_mobile/core/core.dart';
+import 'package:shamo_mobile/features/settings/settings.dart';
 import 'package:shamo_mobile/l10n/l10n.dart';
 
 class App extends StatelessWidget {

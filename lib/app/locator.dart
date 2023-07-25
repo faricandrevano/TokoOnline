@@ -5,6 +5,9 @@ import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:shamo_mobile/app/config.dart';
+import 'package:shamo_mobile/core/core.dart';
+import 'package:shamo_mobile/features/settings/settings.dart';
 
 final getIt = GetIt.instance;
 Future<void> setupLocator() async {
@@ -35,7 +38,7 @@ Future<void> setupLocator() async {
     ..registerLazySingleton(() => SetDoneOnboardingUseCase(getIt()))
     ..registerLazySingleton(() => GetOnboardingStatusUseCase(getIt()));
 
-  // Presentation
+  // Presentationd
   getIt
     ..registerFactory(
       () => LanguageBloc(
@@ -59,7 +62,6 @@ Future<void> _setupCore() async {
   getIt.registerLazySingleton(
     () => CaptureErrorUseCase(),
   );
-  getIt.registerLazySingleton(() => FirebaseAuth.instance);
   getIt.registerLazySingleton(
     () => Dio()
       ..options = BaseOptions(baseUrl: AppConfig.baseUrl.value)
