@@ -18,7 +18,7 @@ class InputLabel extends StatelessWidget {
       children: [
         Row(
           children: [
-            RegularText.mediumSolid(context, label ?? ''),
+            SubTitleText(label ?? ''),
             const SizedBox(width: Dimens.dp8),
             if (isRequired == true)
               RegularText(

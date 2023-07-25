@@ -84,11 +84,11 @@ class RegularInput extends StatelessWidget {
                 TextStyle(
                   fontSize: Dimens.dp14,
                   fontWeight: FontWeight.normal,
-                  color: disabledColor ?? textColor ?? AppColors.gray[900],
+                  color: disabledColor ?? textColor ?? AppColors.white[500],
                 ),
             keyboardType: inputType,
             enabled: enable,
-            cursorColor: AppColors.gray[700],
+            cursorColor: AppColors.white[700],
             onTap: onTap,
             readOnly: readOnly ?? false,
             inputFormatters: inputFormatters,
@@ -99,14 +99,15 @@ class RegularInput extends StatelessWidget {
                   : (prefixIcon != null
                       ? Icon(
                           prefixIcon,
-                          size: Dimens.dp18,
-                          color: disabledColor ?? textColor,
+                          color: disabledColor ??
+                              textColor ??
+                              context.theme.primaryColor,
                         )
                       : null),
               counterText: '',
               fillColor: background ?? disabledColor?.withOpacity(0.2),
               hintText: hintText ?? '',
-              hintStyle: TextStyle(color: textColor),
+              hintStyle: TextStyle(color: textColor ?? disabledColor),
               errorText: errorText,
               suffixIcon: suffix,
             ),

@@ -7,13 +7,19 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shamo_mobile/app/config.dart';
 import 'package:shamo_mobile/core/core.dart';
+import 'package:shamo_mobile/features/auth/auth.dart';
 import 'package:shamo_mobile/features/settings/settings.dart';
 
 final getIt = GetIt.instance;
 Future<void> setupLocator() async {
   await _setupCore();
 
-  // ------------------------------ SETTINGS ---------------------------------
+  // ------------------------------ Authentication ---------------------------------
+
+  // Presentation
+  getIt.registerLazySingleton(() => AuthBloc());
+
+  // ------------------------------ Settings ---------------------------------
 
   // Data
   getIt

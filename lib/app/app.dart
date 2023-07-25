@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:shamo_mobile/app/config.dart';
 import 'package:shamo_mobile/app/route.dart';
 import 'package:shamo_mobile/core/core.dart';
+import 'package:shamo_mobile/features/auth/auth.dart';
 import 'package:shamo_mobile/features/settings/settings.dart';
 import 'package:shamo_mobile/l10n/l10n.dart';
 
@@ -17,7 +18,9 @@ class App extends StatelessWidget {
       const SystemUiOverlayStyle(
         statusBarColor:
             AppConfig.transparentStatusBar ? Colors.transparent : null,
-        statusBarIconBrightness: Brightness.dark,
+        statusBarIconBrightness: AppConfig.defaultTheme == AppTheme.dark
+            ? Brightness.light
+            : Brightness.dark,
       ),
     );
 
@@ -33,6 +36,9 @@ class App extends StatelessWidget {
         BlocProvider(
           create: (context) =>
               GetIt.I<LanguageBloc>()..add(const LanguageStarted()),
+        ),
+        BlocProvider(
+          create: (context) => GetIt.I<AuthBloc>()..add(CheckAuthEvent()),
         ),
       ],
       child: const _AppWidget(),

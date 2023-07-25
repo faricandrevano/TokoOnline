@@ -41,6 +41,7 @@ class _PasswordInputState extends State<PasswordInput> {
   @override
   Widget build(BuildContext context) {
     return RegularInput(
+      prefixIcon: Icons.lock,
       errorText: widget.errorText,
       controller: widget.controller,
       hintText: widget.hintText,

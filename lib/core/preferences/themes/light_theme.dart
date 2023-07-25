@@ -6,12 +6,12 @@ class LightTheme {
   LightTheme(this.primaryColor);
 
   final Color primaryColor;
-  static Color disabledTextColor = AppColors.gray[700]!;
-  static Color secondaryColor = AppColors.gray[700]!;
-  static Color disabledColor = AppColors.gray[700]!;
-  static Color textSolidColor = AppColors.gray[900]!;
+  static Color disabledTextColor = AppColors.white;
+  static Color secondaryColor = AppColors.white;
+  static Color disabledColor = AppColors.white;
+  static Color textSolidColor = AppColors.white;
   static Color errorColor = AppColors.red;
-  static Color dividerColor = AppColors.gray[300]!;
+  static Color dividerColor = AppColors.white;
   static Color inputBackgroundColor = Colors.white;
   static Color scaffoldColor = Colors.white;
   static Color cardColor = Colors.white;

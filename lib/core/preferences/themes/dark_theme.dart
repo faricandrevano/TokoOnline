@@ -6,16 +6,16 @@ class DarkTheme {
   DarkTheme(this.primaryColor);
 
   final Color primaryColor;
-  static Color disabledTextColor = AppColors.gray[300]!;
-  static Color secondaryColor = AppColors.gray[300]!;
-  static Color disabledColor = AppColors.gray[300]!;
-  static Color textSolidColor = AppColors.gray[100]!;
+  static Color disabledTextColor = AppColors.grey[100]!;
+  static Color secondaryColor = AppColors.white;
+  static Color disabledColor = AppColors.grey[100]!;
+  static Color textSolidColor = AppColors.white;
   static Color errorColor = AppColors.red;
-  static Color dividerColor = AppColors.gray[700]!;
-  static Color inputBackgroundColor = AppColors.gray[700]!;
-  static Color scaffoldColor = AppColors.gray[900]!;
-  static Color cardColor = AppColors.gray[700]!;
-  static Color appBarColor = Colors.black;
+  static Color dividerColor = AppColors.purple[500]!;
+  static Color inputBackgroundColor = AppColors.purple[700]!;
+  static Color scaffoldColor = AppColors.purple;
+  static Color cardColor = AppColors.white;
+  static Color appBarColor = Colors.purple;
 
   ColorScheme get scheme => ColorScheme.dark(
         primary: primaryColor,
@@ -46,16 +46,13 @@ class DarkTheme {
             vertical: Dimens.dp14,
             horizontal: Dimens.dp24,
           ),
-          textStyle: text.labelLarge?.copyWith(
-            color: primaryColor,
-            fontFamily: AppConfig.fontFamily,
-          ),
+          textStyle: text.labelLarge?.copyWith(color: primaryColor),
         ),
       );
 
   ElevatedButtonThemeData get elevatedButton => ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          foregroundColor: scheme.onPrimary,
+          foregroundColor: textSolidColor,
           backgroundColor: primaryColor,
           disabledBackgroundColor: primaryColor.withOpacity(.3),
           shape: RoundedRectangleBorder(
@@ -66,10 +63,7 @@ class DarkTheme {
             vertical: Dimens.dp14,
             horizontal: Dimens.dp32,
           ),
-          textStyle: text.labelLarge?.copyWith(
-            color: scheme.onPrimary,
-            fontFamily: AppConfig.fontFamily,
-          ),
+          textStyle: text.labelLarge,
         ),
       );
 
@@ -117,25 +111,19 @@ class DarkTheme {
         filled: true,
         fillColor: inputBackgroundColor,
         contentPadding: const EdgeInsets.symmetric(
-          vertical: Dimens.dp12,
+          vertical: Dimens.dp14,
           horizontal: Dimens.dp16,
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: primaryColor.withOpacity(.3),
-          ),
+          borderSide: BorderSide.none,
           borderRadius: BorderRadius.circular(Dimens.dp16),
         ),
         disabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: primaryColor.withOpacity(.3),
-          ),
+          borderSide: BorderSide.none,
           borderRadius: BorderRadius.circular(Dimens.dp16),
         ),
         border: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: primaryColor.withOpacity(.3),
-          ),
+          borderSide: BorderSide.none,
           borderRadius: BorderRadius.circular(Dimens.dp16),
         ),
         focusedBorder: OutlineInputBorder(
@@ -230,7 +218,7 @@ class DarkTheme {
         ),
 
         labelLarge: const TextStyle(
-          fontSize: Dimens.dp18,
+          fontSize: Dimens.dp16,
           fontWeight: FontWeight.w500,
           fontFamily: AppConfig.fontFamily,
         ),
