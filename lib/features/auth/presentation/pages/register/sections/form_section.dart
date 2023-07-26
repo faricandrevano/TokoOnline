@@ -33,7 +33,13 @@ class _FormSection extends StatelessWidget {
         ),
         Dimens.dp32.height,
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              MainPage.routeName,
+              (route) => false,
+            );
+          },
           child: const Text('Sign Up'),
         ),
         Dimens.dp32.height,

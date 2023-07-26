@@ -7,15 +7,15 @@ class DarkTheme {
 
   final Color primaryColor;
   static Color disabledTextColor = AppColors.grey[100]!;
-  static Color secondaryColor = AppColors.white;
+  static Color secondaryColor = AppColors.grey[300]!;
   static Color disabledColor = AppColors.grey[100]!;
   static Color textSolidColor = AppColors.white;
   static Color errorColor = AppColors.red;
   static Color dividerColor = AppColors.purple[500]!;
   static Color inputBackgroundColor = AppColors.purple[700]!;
   static Color scaffoldColor = AppColors.purple;
-  static Color cardColor = AppColors.white;
-  static Color appBarColor = Colors.purple;
+  static Color cardColor = AppColors.purple[700]!;
+  static Color appBarColor = Colors.blue;
 
   ColorScheme get scheme => ColorScheme.dark(
         primary: primaryColor,
@@ -80,12 +80,13 @@ class DarkTheme {
       );
 
   AppBarTheme get appBar => AppBarTheme(
-        color: appBarColor,
+        color: scaffoldColor,
+        centerTitle: true,
         titleTextStyle: text.titleLarge?.copyWith(
           fontFamily: AppConfig.fontFamily,
           color: textSolidColor,
-          fontWeight: FontWeight.w600,
-          fontSize: Dimens.dp24,
+          fontWeight: FontWeight.w500,
+          fontSize: Dimens.dp18,
         ),
         toolbarTextStyle: text.titleLarge?.copyWith(
           color: textSolidColor,
@@ -232,8 +233,12 @@ class DarkTheme {
 
   FloatingActionButtonThemeData get floatingButton =>
       FloatingActionButtonThemeData(
-        backgroundColor: primaryColor,
+        backgroundColor: secondaryColor,
         elevation: 2,
+        foregroundColor: cardColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(Dimens.dp100),
+        ),
       );
 
   BottomSheetThemeData get bottomSheet => BottomSheetThemeData(
@@ -250,10 +255,17 @@ class DarkTheme {
         thickness: 1,
       );
 
+  BottomAppBarTheme get bottomAppBarTheme => BottomAppBarTheme(
+        color: cardColor,
+        padding: EdgeInsets.zero,
+        shape: const CircularNotchedRectangle(),
+      );
+
   ThemeData get toTheme {
     return ThemeData(
       useMaterial3: true,
       fontFamily: AppConfig.fontFamily,
+      bottomAppBarTheme: bottomAppBarTheme,
       primaryColor: primaryColor,
       scaffoldBackgroundColor: scaffoldColor,
       canvasColor: scaffoldColor,
@@ -273,6 +285,7 @@ class DarkTheme {
       floatingActionButtonTheme: floatingButton,
       bottomSheetTheme: bottomSheet,
       dividerTheme: divider,
+      cardColor: cardColor,
       colorScheme: scheme.copyWith(error: errorColor),
     );
   }
