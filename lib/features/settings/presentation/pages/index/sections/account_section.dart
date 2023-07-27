@@ -13,8 +13,20 @@ class _AccountSection extends StatelessWidget {
         _tile('Edit Profile', onTap: () {
           Navigator.pushNamed(context, EditProfilePage.routeName);
         }),
-        _tile('Your Orders'),
-        _tile('Help'),
+        _tile('Your Orders', onTap: () {
+          Navigator.pushNamed(context, TransactionPage.routeName);
+        }),
+        _tile('Help', onTap: () {
+          Navigator.push(
+            context,
+            CupertinoPageRoute(
+              builder: (context) => WebViewPage(
+                appBar: AppBar(title: const Text('Help')),
+                url: 'https://shamo.donisaputra.com/',
+              ),
+            ),
+          );
+        }),
       ],
     );
   }

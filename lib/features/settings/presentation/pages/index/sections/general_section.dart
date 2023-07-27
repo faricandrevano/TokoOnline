@@ -10,16 +10,36 @@ class _GeneralSection extends StatelessWidget {
       children: [
         const SubTitleText('General'),
         Dimens.dp16.height,
-        _tile('Privacy & Policy'),
-        _tile('Term of Service'),
+        _tile('Privacy & Policy', onTap: () {
+          Navigator.push(
+            context,
+            CupertinoPageRoute(
+              builder: (context) => WebViewPage(
+                appBar: AppBar(title: const Text('Privacy & Policy')),
+                url: 'https://shamo.donisaputra.com/',
+              ),
+            ),
+          );
+        }),
+        _tile('Term of Service', onTap: () {
+          Navigator.push(
+            context,
+            CupertinoPageRoute(
+              builder: (context) => WebViewPage(
+                appBar: AppBar(title: const Text('Term of Service')),
+                url: 'https://shamo.donisaputra.com/',
+              ),
+            ),
+          );
+        }),
         _tile('Rate App'),
       ],
     );
   }
 
-  Widget _tile(String title) {
+  Widget _tile(String title, {Function()? onTap}) {
     return InkWell(
-      onTap: () {},
+      onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: Dimens.dp12),
         child: Row(

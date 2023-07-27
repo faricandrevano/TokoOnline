@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:rupiah_wallet/core/core.dart';
+import 'package:shamo_mobile/core/core.dart';
 
 class SmartNetworkImage extends StatelessWidget {
   const SmartNetworkImage(
@@ -30,7 +29,7 @@ class SmartNetworkImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: radius ?? BorderRadius.circular(0),
+      borderRadius: radius ?? BorderRadius.zero,
       child: FadeInImage(
         image: _provider,
         width: width,
@@ -38,24 +37,14 @@ class SmartNetworkImage extends StatelessWidget {
         fit: fit,
         placeholderFit: BoxFit.cover,
         placeholder: const AssetImage(
-          MainAssets.placeholderImg,
+          MainAssets.image,
         ),
         imageErrorBuilder: (context, _, __) {
-          if (address != null) {
-            return SvgPicture.network(
-              'https://avatars.dicebear.com/api/identicon/$address.svg',
-              width: width,
-              height: height,
-              fit: fit ?? BoxFit.cover,
-            );
-          } else {
-            return Image.asset(
-              MainAssets.placeholderImg,
-              width: width,
-              height: height,
-              fit: fit,
-            );
-          }
+          return SkeletonAnimation(
+            width: width,
+            height: height,
+            borderRadius: radius ?? BorderRadius.zero,
+          );
         },
       ),
     );

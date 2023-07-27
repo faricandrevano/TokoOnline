@@ -12,8 +12,7 @@ class MainAssets {
   static const logoIconImg = '$_baseImagePath/icons/ic_logo.webp';
 
   // Illustration
-  static const banner1Img = '$_baseImagePath/illustration/banner1.webp';
-  static const banner2Img = '$_baseImagePath/illustration/banner2.webp';
+  static const image = '$_baseImagePath/illustration/image.webp';
 
   // SVG
   static const airplaneSvg = '$_baseImagePath/svg/airplane.svg';

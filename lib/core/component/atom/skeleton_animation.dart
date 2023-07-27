@@ -12,6 +12,7 @@ class SkeletonAnimation extends StatelessWidget {
     this.child,
     this.baseColor,
     this.highlightColor,
+    this.borderRadius,
   }) : super(key: key);
 
   final Color? backgroundColor;
@@ -20,6 +21,7 @@ class SkeletonAnimation extends StatelessWidget {
   final double? width;
   final double? height;
   final double? radius;
+  final BorderRadius? borderRadius;
   final Widget? child;
 
   @override
@@ -34,7 +36,7 @@ class SkeletonAnimation extends StatelessWidget {
             decoration: BoxDecoration(
               color: backgroundColor ??
                   context.theme.disabledColor.withOpacity(.5),
-              borderRadius: BorderRadius.circular(radius ?? 4),
+              borderRadius: borderRadius ?? BorderRadius.circular(radius ?? 4),
             ),
           ),
     );

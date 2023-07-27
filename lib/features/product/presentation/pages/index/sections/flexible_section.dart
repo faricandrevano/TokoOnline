@@ -56,7 +56,9 @@ class _FlexibleSpaceState extends State<_FlexibleSpace> {
                 ),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, CartPage.routeName);
+                },
                 icon: Icon(
                   Icons.shopping_bag_rounded,
                   color: context.theme.scaffoldBackgroundColor,

@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shamo_mobile/core/core.dart';
+import 'package:shamo_mobile/features/cart/cart.dart';
 import 'package:shamo_mobile/features/chat/chat.dart';
 
 part 'sections/flexible_section.dart';

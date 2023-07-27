@@ -6,6 +6,7 @@ import 'package:shamo_mobile/features/chat/chat.dart';
 import 'package:shamo_mobile/features/home/home.dart';
 import 'package:shamo_mobile/features/product/product.dart';
 import 'package:shamo_mobile/features/settings/settings.dart';
+import 'package:shamo_mobile/features/transaction/transaction.dart';
 
 final RouteObserver<ModalRoute> routeObserver = RouteObserver<ModalRoute>();
 
@@ -44,6 +45,21 @@ Route<dynamic> route(RouteSettings settings) {
     case CartPage.routeName:
       return MaterialPageRoute(
         builder: (_) => const CartPage(),
+        settings: settings,
+      );
+    case SuccessCheckoutPage.routeName:
+      return MaterialPageRoute(
+        builder: (_) => const SuccessCheckoutPage(),
+        settings: settings,
+      );
+    case CheckoutPage.routeName:
+      return CupertinoPageRoute(
+        builder: (_) => const CheckoutPage(),
+        settings: settings,
+      );
+    case TransactionPage.routeName:
+      return CupertinoPageRoute(
+        builder: (_) => const TransactionPage(),
         settings: settings,
       );
     default:

@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shamo_mobile/app/config.dart';
 import 'package:shamo_mobile/core/core.dart';
 import 'package:shamo_mobile/features/settings/settings.dart';
+import 'package:shamo_mobile/features/transaction/transaction.dart';
 
 part 'sections/heading_section.dart';
 part 'sections/account_section.dart';
