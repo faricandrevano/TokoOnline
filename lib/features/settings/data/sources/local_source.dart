@@ -5,7 +5,7 @@ import 'package:shamo_mobile/app/config.dart';
 import 'package:shamo_mobile/core/core.dart';
 import 'package:shamo_mobile/features/settings/settings.dart';
 
-abstract class SettingsLocalDataSource implements CacheDataSource<Settings> {
+abstract class SettingsLocalSource implements CacheDataSource<Settings> {
   Future<bool> setTheme(AppTheme theme);
 
   Future<bool> setLanguage(Language language);
@@ -15,8 +15,8 @@ abstract class SettingsLocalDataSource implements CacheDataSource<Settings> {
   Future<bool> getOnboardingStatus();
 }
 
-class SettingsLocalDataSourceImpl implements SettingsLocalDataSource {
-  SettingsLocalDataSourceImpl(this.hive);
+class SettingsLocalSourceImpl implements SettingsLocalSource {
+  SettingsLocalSourceImpl(this.hive);
 
   final HiveInterface hive;
 
