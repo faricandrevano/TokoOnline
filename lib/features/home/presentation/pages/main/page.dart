@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shamo_mobile/core/core.dart';
+import 'package:shamo_mobile/features/cart/cart.dart';
 import 'package:shamo_mobile/features/chat/chat.dart';
 import 'package:shamo_mobile/features/favorite/favorite.dart';
 import 'package:shamo_mobile/features/home/home.dart';
@@ -38,7 +39,9 @@ class MainView extends StatelessWidget {
         return Scaffold(
           body: pages[index],
           floatingActionButton: FloatingActionButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, CartPage.routeName);
+            },
             child: const Icon(Icons.shopping_bag_rounded),
           ),
           floatingActionButtonLocation:
