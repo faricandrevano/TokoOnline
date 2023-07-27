@@ -38,7 +38,7 @@ class App extends StatelessWidget {
               GetIt.I<LanguageBloc>()..add(const LanguageStarted()),
         ),
         BlocProvider(
-          create: (context) => GetIt.I<AuthBloc>()..add(CheckAuthEvent()),
+          create: (context) => GetIt.I<AuthBloc>()..add(GetProfileEvent()),
         ),
       ],
       child: const _AppWidget(),

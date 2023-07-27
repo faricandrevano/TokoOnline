@@ -1,24 +1,13 @@
 class MetaError {
-  MetaError({this.statusCode, this.errorCode, this.message, this.errors});
+  final int code;
+  final String status;
+  final String message;
+
+  MetaError({required this.code, required this.status, required this.message});
 
   factory MetaError.fromJson(Map<String, dynamic> json) => MetaError(
-        statusCode: json['statusCode'] as int?,
-        errorCode: json['errorCode'] as String?,
-        message: json['message'] as String?,
-        errors: json['errors'] as List<dynamic>?,
+        code: json['code'],
+        status: json['status'],
+        message: json['message'],
       );
-
-  int? statusCode;
-  String? errorCode;
-  String? message;
-  List<dynamic>? errors;
-
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['statusCode'] = statusCode;
-    data['errorCode'] = errorCode;
-    data['message'] = message;
-    data['errors'] = errors;
-    return data;
-  }
 }

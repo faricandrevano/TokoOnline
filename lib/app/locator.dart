@@ -16,18 +16,46 @@ Future<void> setupLocator() async {
 
   // ------------------------------ Authentication ---------------------------------
 
+  // Data
+  getIt
+    ..registerLazySingleton<AuthApiSource>(
+      () => AuthApiSourceImpl(getIt(), authLocalSource: getIt()),
+    )
+    ..registerLazySingleton<AuthLocalSource>(
+      () => AuthLocalSourceImpl(getIt()),
+    )
+    ..registerLazySingleton<AuthRepository>(
+      () => AuthRepositoryImpl(getIt()),
+    );
+
+  // Domain
+  getIt
+    ..registerLazySingleton(() => LoginUseCase(getIt()))
+    ..registerLazySingleton(() => RegisterUseCase(getIt()))
+    ..registerLazySingleton(() => ChangePasswordUseCase(getIt()))
+    ..registerLazySingleton(() => UpdateProfileUseCase(getIt()))
+    ..registerLazySingleton(() => GetProfileUseCase(getIt()))
+    ..registerLazySingleton(() => LogoutUseCase(getIt()));
+
   // Presentation
-  getIt.registerLazySingleton(() => AuthBloc());
+  getIt.registerLazySingleton(() => AuthBloc(
+        changePasswordUseCase: getIt(),
+        getProfileUseCase: getIt(),
+        loginUseCase: getIt(),
+        logoutUseCase: getIt(),
+        registerUseCase: getIt(),
+        updateProfileUseCase: getIt(),
+      ));
 
   // ------------------------------ Settings ---------------------------------
 
   // Data
   getIt
-    ..registerLazySingleton<SettingsLocalDataSource>(
-      () => SettingsLocalDataSourceImpl(getIt()),
+    ..registerLazySingleton<SettingsLocalSource>(
+      () => SettingsLocalSourceImpl(getIt()),
     )
     ..registerLazySingleton<SettingsRepository>(
-      () => SettingsRepositoryImpl(localDataSource: getIt()),
+      () => SettingsRepositoryImpl(localSource: getIt()),
     );
 
   // Domain
@@ -71,9 +99,10 @@ Future<void> _setupCore() async {
   getIt.registerLazySingleton(
     () => Dio()
       ..options = BaseOptions(baseUrl: AppConfig.baseUrl.value)
-      ..interceptors.add(
+      ..interceptors.addAll([
         LogInterceptor(requestBody: true, responseBody: true),
-      ),
+        AuthHttpInterceptor(authLocalSource: getIt(), onUnAuth: () {}),
+      ]),
   );
 
   if (!kIsWeb) {
