@@ -95,15 +95,15 @@ class DarkTheme {
           fontSize: 16,
         ),
         surfaceTintColor: appBarColor,
-        elevation: .15,
+        elevation: 0,
         scrolledUnderElevation: .15,
         shadowColor: dividerColor.withOpacity(0.5),
         iconTheme: IconThemeData(
-          color: primaryColor,
+          color: textSolidColor,
           size: Dimens.dp24,
         ),
         actionsIconTheme: IconThemeData(
-          color: primaryColor,
+          color: textSolidColor,
           size: Dimens.dp24,
         ),
       );
@@ -256,7 +256,7 @@ class DarkTheme {
       );
 
   BottomAppBarTheme get bottomAppBarTheme => BottomAppBarTheme(
-        color: cardColor,
+        color: scaffoldColor,
         padding: EdgeInsets.zero,
         shape: const CircularNotchedRectangle(),
       );

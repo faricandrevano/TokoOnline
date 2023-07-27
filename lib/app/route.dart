@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shamo_mobile/features/auth/auth.dart';
 import 'package:shamo_mobile/features/home/home.dart';
+import 'package:shamo_mobile/features/product/product.dart';
 import 'package:shamo_mobile/features/settings/settings.dart';
 
 final RouteObserver<ModalRoute> routeObserver = RouteObserver<ModalRoute>();
@@ -26,6 +27,11 @@ Route<dynamic> route(RouteSettings settings) {
     case MainPage.routeName:
       return MaterialPageRoute(
         builder: (_) => const MainPage(),
+        settings: settings,
+      );
+    case ProductPage.routeName:
+      return MaterialPageRoute(
+        builder: (_) => ProductPage(id: settings.arguments as String),
         settings: settings,
       );
     default:
