@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shamo_mobile/core/core.dart';
+import 'package:shamo_mobile/features/chat/chat.dart';
 
 part 'sections/flexible_section.dart';
 part 'sections/title_section.dart';
@@ -65,7 +66,12 @@ class ProductPage extends StatelessWidget {
                     child: Row(
                       children: [
                         OutlinedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(
+                              context,
+                              DetailChatPage.routeName,
+                            );
+                          },
                           child: const Icon(CupertinoIcons.chat_bubble_2_fill),
                         ),
                         Dimens.dp16.width,

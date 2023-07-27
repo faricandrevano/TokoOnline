@@ -1,0 +1,31 @@
+part of '../page.dart';
+
+class _ReceiverSection extends StatelessWidget {
+  const _ReceiverSection({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(
+            horizontal: Dimens.dp16,
+            vertical: Dimens.dp12,
+          ),
+          decoration: BoxDecoration(
+            color: context.theme.dividerColor,
+            borderRadius: const BorderRadius.only(
+              topRight: Radius.circular(Dimens.dp16),
+              bottomLeft: Radius.circular(Dimens.dp16),
+              bottomRight: Radius.circular(Dimens.dp16),
+            ),
+          ),
+          child: const RegularText(
+            'Hi, This item is still available?',
+          ),
+        ),
+      ],
+    );
+  }
+}
