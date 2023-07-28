@@ -8,6 +8,7 @@ class DetailProductState extends Equatable {
     this.product,
     this.status = DetailProductStateStatus.initial,
     this.index = 0,
+    this.isFavorite = false,
   });
 
   factory DetailProductState.initial() {
@@ -18,21 +19,24 @@ class DetailProductState extends Equatable {
   final Product? product;
   final Failure? failure;
   final int index;
+  final bool isFavorite;
 
   DetailProductState copyWith({
     DetailProductStateStatus? status,
     Product? product,
     Failure? failure,
     int? index,
+    bool? isFavorite,
   }) {
     return DetailProductState(
       failure: failure ?? this.failure,
       product: product ?? this.product,
       status: status ?? this.status,
       index: index ?? this.index,
+      isFavorite: isFavorite ?? this.isFavorite,
     );
   }
 
   @override
-  List<Object?> get props => [status, failure, product, index];
+  List<Object?> get props => [status, failure, product, index, isFavorite];
 }

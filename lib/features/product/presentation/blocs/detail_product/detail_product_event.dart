@@ -16,6 +16,24 @@ class GetDetailProductEvent extends DetailProductEvent {
   List<Object> get props => [id];
 }
 
+class CheckFavoriteProductEvent extends DetailProductEvent {
+  final String id;
+
+  const CheckFavoriteProductEvent(this.id);
+
+  @override
+  List<Object> get props => [id];
+}
+
+class ActionFavoriteProductEvent extends DetailProductEvent {
+  final String id;
+
+  const ActionFavoriteProductEvent(this.id);
+
+  @override
+  List<Object> get props => [id];
+}
+
 class ChangeIndexDetailProductEvent extends DetailProductEvent {
   final int index;
 

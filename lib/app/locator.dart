@@ -8,6 +8,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:shamo_mobile/app/config.dart';
 import 'package:shamo_mobile/core/core.dart';
 import 'package:shamo_mobile/features/auth/auth.dart';
+import 'package:shamo_mobile/features/favorite/favorite.dart';
 import 'package:shamo_mobile/features/product/product.dart';
 import 'package:shamo_mobile/features/settings/settings.dart';
 
@@ -81,8 +82,34 @@ Future<void> setupLocator() async {
       ),
     )
     ..registerLazySingleton(
-      () => DetailProductBloc(getProductUseCase: getIt()),
+      () => DetailProductBloc(
+        getProductUseCase: getIt(),
+        checkProductFavoriteUseCase: getIt(),
+        actionProductFavoriteUseCase: getIt(),
+      ),
     );
+
+  // ------------------------------ Favorite ---------------------------------
+
+  // Data
+  getIt
+    ..registerLazySingleton<FavoriteApiSource>(
+      () => FavoriteApiSourceImpl(getIt()),
+    )
+    ..registerLazySingleton<FavoriteRepository>(
+      () => FavoriteRepositoryImpl(getIt()),
+    );
+
+  // Domain
+  getIt
+    ..registerLazySingleton(() => CheckProductFavoriteUseCase(getIt()))
+    ..registerLazySingleton(() => ActionProductFavoriteUseCase(getIt()));
+
+  // Presentation
+  // getIt
+  //   ..registerLazySingleton(
+  //     () => CategoryBloc(getCategoriesUseCase: getIt()),
+  //   );
 
   // ------------------------------ Settings ---------------------------------
 

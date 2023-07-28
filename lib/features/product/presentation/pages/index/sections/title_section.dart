@@ -22,13 +22,23 @@ class _TitleSection extends StatelessWidget {
                   ],
                 ),
               ),
-              Container(
-                padding: const EdgeInsets.all(Dimens.dp8),
-                decoration: BoxDecoration(
-                  color: context.theme.primaryColor,
-                  shape: BoxShape.circle,
+              InkWell(
+                borderRadius: BorderRadius.circular(Dimens.dp100),
+                onTap: () {
+                  context.read<DetailProductBloc>().add(
+                        ActionFavoriteProductEvent(state.product!.id),
+                      );
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(Dimens.dp8),
+                  decoration: BoxDecoration(
+                    color: state.isFavorite
+                        ? context.theme.primaryColor
+                        : context.theme.cardColor,
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(Icons.favorite_rounded, size: 18),
                 ),
-                child: const Icon(Icons.favorite_rounded, size: 18),
               ),
             ],
           );
