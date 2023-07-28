@@ -6,6 +6,7 @@ import 'package:shamo_mobile/features/cart/cart.dart';
 import 'package:shamo_mobile/features/chat/chat.dart';
 import 'package:shamo_mobile/features/favorite/favorite.dart';
 import 'package:shamo_mobile/features/home/home.dart';
+import 'package:shamo_mobile/features/product/product.dart';
 import 'package:shamo_mobile/features/settings/settings.dart';
 
 class MainPage extends StatelessWidget {
@@ -22,18 +23,31 @@ class MainPage extends StatelessWidget {
   }
 }
 
-class MainView extends StatelessWidget {
+class MainView extends StatefulWidget {
   const MainView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final List<Widget> pages = [
-      const HomePage(),
-      const ChatPage(),
-      const FavoritePage(),
-      const ProfilePage(),
-    ];
+  State<MainView> createState() => _MainViewState();
+}
 
+class _MainViewState extends State<MainView> {
+  final List<Widget> pages = [
+    const HomePage(),
+    const ChatPage(),
+    const FavoritePage(),
+    const ProfilePage(),
+  ];
+
+  @override
+  void initState() {
+    context
+      ..read<CategoryBloc>().add(GetCategoryEvent())
+      ..read<ProductBloc>().add(GetPopularProductEvent());
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return BlocBuilder<BottomNavBloc, int>(
       builder: (context, index) {
         return Scaffold(

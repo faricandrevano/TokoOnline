@@ -29,6 +29,7 @@ class _ProfileSection extends StatelessWidget {
                 width: 54,
                 height: 54,
                 radius: BorderRadius.circular(Dimens.dp100),
+                fit: BoxFit.cover,
               ),
             ],
           );

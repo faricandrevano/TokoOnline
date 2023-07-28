@@ -8,6 +8,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:shamo_mobile/app/config.dart';
 import 'package:shamo_mobile/core/core.dart';
 import 'package:shamo_mobile/features/auth/auth.dart';
+import 'package:shamo_mobile/features/product/product.dart';
 import 'package:shamo_mobile/features/settings/settings.dart';
 
 final getIt = GetIt.instance;
@@ -49,6 +50,36 @@ Future<void> setupLocator() async {
         ))
     ..registerLazySingleton(() => FormAuthBloc())
     ..registerLazySingleton(() => FormAccountBloc());
+
+  // ------------------------------ Product & Category ---------------------------------
+
+  // Data
+  getIt
+    ..registerLazySingleton<ProductApiSource>(
+      () => ProductApiSourceImpl(getIt()),
+    )
+    ..registerLazySingleton<ProductRepository>(
+      () => ProductRepositoryImpl(getIt()),
+    );
+
+  // Domain
+  getIt
+    ..registerLazySingleton(() => GetCategoriesUseCase(getIt()))
+    ..registerLazySingleton(() => GetProductsByCategoryUseCase(getIt()))
+    ..registerLazySingleton(() => GetProductUseCase(getIt()))
+    ..registerLazySingleton(() => GetProductsUseCase(getIt()));
+
+  // Presentation
+  getIt
+    ..registerLazySingleton(
+      () => CategoryBloc(getCategoriesUseCase: getIt()),
+    )
+    ..registerLazySingleton(
+      () => ProductBloc(
+        getProductsByCategoryUseCase: getIt(),
+        getProductsUseCase: getIt(),
+      ),
+    );
 
   // ------------------------------ Settings ---------------------------------
 

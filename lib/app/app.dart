@@ -7,6 +7,7 @@ import 'package:shamo_mobile/app/config.dart';
 import 'package:shamo_mobile/app/route.dart';
 import 'package:shamo_mobile/core/core.dart';
 import 'package:shamo_mobile/features/auth/auth.dart';
+import 'package:shamo_mobile/features/product/product.dart';
 import 'package:shamo_mobile/features/settings/settings.dart';
 import 'package:shamo_mobile/l10n/l10n.dart';
 
@@ -43,6 +44,8 @@ class App extends StatelessWidget {
         BlocProvider(
           create: (context) => GetIt.I<AuthBloc>()..add(GetProfileEvent()),
         ),
+        BlocProvider(create: (context) => GetIt.I<CategoryBloc>()),
+        BlocProvider(create: (context) => GetIt.I<ProductBloc>()),
       ],
       child: const _AppWidget(),
     );

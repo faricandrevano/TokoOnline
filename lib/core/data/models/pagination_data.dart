@@ -1,15 +1,30 @@
-/// Handle Paginate Data
-class PaginationData<T, Meta> {
-  PaginationData({required this.data, required this.meta});
+class PaginationData<T> {
+  final int lastPage;
+  final int currentPage;
+  final List<T> data;
 
-  /// [T] as data type.
-  ///
-  /// Example your get data from API `List<YourData>`, this result data is [T]
-  final T data;
+  PaginationData({
+    required this.lastPage,
+    required this.currentPage,
+    required this.data,
+  });
 
-  /// [Meta] as metadata in pagination.
-  ///
-  /// Like info current page, info next page, total page
-  /// and many more info in pagination data
-  final Meta meta;
+  factory PaginationData.fromJson(
+    Map<String, dynamic> json,
+    T Function(Map<String, dynamic>) fromJsonT,
+  ) {
+    List<T> datas = <T>[];
+
+    if (json['data'] != null) {
+      json['data'].forEach((dynamic item) {
+        datas.add(fromJsonT(item as Map<String, dynamic>));
+      });
+    }
+
+    return PaginationData(
+      data: datas,
+      currentPage: json['current_page'] as int,
+      lastPage: json['last_page'] as int,
+    );
+  }
 }

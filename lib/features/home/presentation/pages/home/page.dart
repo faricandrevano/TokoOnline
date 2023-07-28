@@ -9,34 +9,45 @@ part 'sections/category_section.dart';
 part 'sections/profile_section.dart';
 part 'sections/popular_section.dart';
 part 'sections/new_section.dart';
+part 'sections/product_section.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            backgroundColor: context.theme.scaffoldBackgroundColor,
-            expandedHeight: 160,
-            pinned: true,
-            flexibleSpace: FlexibleSpaceBar(
-              background: _ProfileSection(key: key),
-              titlePadding: EdgeInsets.zero,
-              expandedTitleScale: 1,
-              title: _CategorySection(key: key),
-            ),
+    return BlocBuilder<CategoryBloc, CategoryState>(
+      builder: (context, state) {
+        return Scaffold(
+          body: CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                backgroundColor: context.theme.scaffoldBackgroundColor,
+                expandedHeight: 160,
+                pinned: true,
+                flexibleSpace: FlexibleSpaceBar(
+                  background: _ProfileSection(key: key),
+                  titlePadding: EdgeInsets.zero,
+                  expandedTitleScale: 1,
+                  title: _CategorySection(key: key),
+                ),
+              ),
+              if (state.id.isEmpty) ...[
+                SliverToBoxAdapter(
+                  child: _PopularSection(key: key),
+                ),
+                SliverToBoxAdapter(
+                  child: _NewSection(key: key),
+                ),
+              ],
+              if (state.id.isNotEmpty)
+                SliverToBoxAdapter(
+                  child: _ProductSection(key: key),
+                ),
+            ],
           ),
-          SliverToBoxAdapter(
-            child: _PopularSection(key: key),
-          ),
-          SliverToBoxAdapter(
-            child: _NewSection(key: key),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
