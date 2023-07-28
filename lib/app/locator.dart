@@ -103,13 +103,16 @@ Future<void> setupLocator() async {
   // Domain
   getIt
     ..registerLazySingleton(() => CheckProductFavoriteUseCase(getIt()))
-    ..registerLazySingleton(() => ActionProductFavoriteUseCase(getIt()));
+    ..registerLazySingleton(() => ActionProductFavoriteUseCase(getIt()))
+    ..registerLazySingleton(() => GetProductFavoritesUseCase(getIt()));
 
   // Presentation
-  // getIt
-  //   ..registerLazySingleton(
-  //     () => CategoryBloc(getCategoriesUseCase: getIt()),
-  //   );
+  getIt.registerLazySingleton(
+    () => FavoriteBloc(
+      actionProductFavoriteUseCase: getIt(),
+      getProductFavoritesUseCase: getIt(),
+    ),
+  );
 
   // ------------------------------ Settings ---------------------------------
 
