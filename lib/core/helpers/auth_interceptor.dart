@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:shamo_mobile/features/auth/auth.dart';
@@ -19,8 +17,6 @@ class AuthHttpInterceptor extends InterceptorsWrapper {
     final token = await authLocalSource.getData();
 
     final optionHeaders = <String, Object>{};
-
-    log('TOKEN ${token.toString()}', name: 'TOKEN');
 
     if (token != null) {
       optionHeaders.putIfAbsent('Authorization', () => 'Bearer $token');

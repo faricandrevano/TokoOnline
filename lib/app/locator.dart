@@ -38,14 +38,17 @@ Future<void> setupLocator() async {
     ..registerLazySingleton(() => LogoutUseCase(getIt()));
 
   // Presentation
-  getIt.registerLazySingleton(() => AuthBloc(
-        changePasswordUseCase: getIt(),
-        getProfileUseCase: getIt(),
-        loginUseCase: getIt(),
-        logoutUseCase: getIt(),
-        registerUseCase: getIt(),
-        updateProfileUseCase: getIt(),
-      ));
+  getIt
+    ..registerLazySingleton(() => AuthBloc(
+          changePasswordUseCase: getIt(),
+          getProfileUseCase: getIt(),
+          loginUseCase: getIt(),
+          logoutUseCase: getIt(),
+          registerUseCase: getIt(),
+          updateProfileUseCase: getIt(),
+        ))
+    ..registerLazySingleton(() => FormAuthBloc())
+    ..registerLazySingleton(() => FormAccountBloc());
 
   // ------------------------------ Settings ---------------------------------
 

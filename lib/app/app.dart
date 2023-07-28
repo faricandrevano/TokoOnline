@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shamo_mobile/app/config.dart';
 import 'package:shamo_mobile/app/route.dart';
@@ -37,6 +38,8 @@ class App extends StatelessWidget {
           create: (context) =>
               GetIt.I<LanguageBloc>()..add(const LanguageStarted()),
         ),
+        BlocProvider(create: (context) => GetIt.I<FormAuthBloc>()),
+        BlocProvider(create: (context) => GetIt.I<FormAccountBloc>()),
         BlocProvider(
           create: (context) => GetIt.I<AuthBloc>()..add(GetProfileEvent()),
         ),
@@ -66,6 +69,7 @@ class _AppWidget extends StatelessWidget {
       navigatorObservers: [routeObserver],
       onGenerateRoute: route,
       home: const SplashPage(),
+      builder: EasyLoading.init(),
     );
   }
 }

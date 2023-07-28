@@ -2,15 +2,15 @@ import 'package:shamo_mobile/app/flavor.dart';
 import 'package:shamo_mobile/core/core.dart';
 
 class AppConfig {
-  static const String appName = 'Airplane';
+  static const String appName = 'Shamo';
   static const String fontFamily = 'Poppins';
   static const String profileUrl =
       'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png';
 
   static const FlavorConfig<String> baseUrl = FlavorConfig<String>(
-    prod: 'https://api.example.com/v1',
-    dev: 'https://api.dev.example.com/v1',
-    stag: 'https://api.stag.example.com/v1',
+    prod: 'https://shamo.donisaputra.com/api',
+    dev: 'https://shamo.donisaputra.com/api',
+    stag: 'https://shamo.donisaputra.com/api',
   );
   static const AppTheme defaultTheme = AppTheme.dark;
   static const bool autoStringifyEquatable = true;
