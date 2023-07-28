@@ -79,6 +79,9 @@ Future<void> setupLocator() async {
         getProductsByCategoryUseCase: getIt(),
         getProductsUseCase: getIt(),
       ),
+    )
+    ..registerLazySingleton(
+      () => DetailProductBloc(getProductUseCase: getIt()),
     );
 
   // ------------------------------ Settings ---------------------------------

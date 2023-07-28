@@ -68,6 +68,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
 
     on<GetCategoryProductEvent>((event, emit) async {
       try {
+        emit(state.copyWith(statusCategory: ProductStateStatus.loading));
         final usecase = await getProductsByCategoryUseCase(
           GetProductsByCategoryParams(
             id: event.id,
@@ -78,13 +79,13 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         usecase.fold(
           (l) {
             emit(state.copyWith(
-              status: ProductStateStatus.failure,
+              statusCategory: ProductStateStatus.failure,
               failure: l,
             ));
           },
           (r) {
             emit(state.copyWith(
-              status: ProductStateStatus.success,
+              statusCategory: ProductStateStatus.success,
               products: r.data,
             ));
           },

@@ -10,6 +10,7 @@ part 'sections/profile_section.dart';
 part 'sections/popular_section.dart';
 part 'sections/new_section.dart';
 part 'sections/product_section.dart';
+part 'sections/skeleton_product_section.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

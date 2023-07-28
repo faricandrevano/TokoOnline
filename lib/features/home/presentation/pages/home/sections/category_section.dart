@@ -48,8 +48,10 @@ class _CategorySection extends StatelessWidget {
                           borderRadius: BorderRadius.circular(Dimens.dp12),
                           onTap: () {
                             context
-                                .read<CategoryBloc>()
-                                .add(SelectCategoryEvent(e.id));
+                              ..read<CategoryBloc>()
+                                  .add(SelectCategoryEvent(e.id))
+                              ..read<ProductBloc>()
+                                  .add(GetCategoryProductEvent(e.id));
                           },
                           child: Container(
                             margin: const EdgeInsets.all(Dimens.dp8),

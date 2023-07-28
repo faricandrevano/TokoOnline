@@ -5,22 +5,26 @@ class _PriceSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(Dimens.dp16),
-      decoration: BoxDecoration(
-        color: context.theme.cardColor,
-        borderRadius: BorderRadius.circular(Dimens.dp4),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const RegularText('Price starts from'),
-          SubTitleText(
-            'Rp12,324',
-            style: TextStyle(color: context.theme.primaryColor),
+    return BlocBuilder<DetailProductBloc, DetailProductState>(
+      builder: (context, state) {
+        return Container(
+          padding: const EdgeInsets.all(Dimens.dp16),
+          decoration: BoxDecoration(
+            color: context.theme.cardColor,
+            borderRadius: BorderRadius.circular(Dimens.dp4),
           ),
-        ],
-      ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const RegularText('Price starts from'),
+              SubTitleText(
+                (state.product?.price ?? 0).toIDR(),
+                style: TextStyle(color: context.theme.primaryColor),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

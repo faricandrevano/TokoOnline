@@ -46,6 +46,7 @@ class App extends StatelessWidget {
         ),
         BlocProvider(create: (context) => GetIt.I<CategoryBloc>()),
         BlocProvider(create: (context) => GetIt.I<ProductBloc>()),
+        BlocProvider(create: (context) => GetIt.I<DetailProductBloc>()),
       ],
       child: const _AppWidget(),
     );

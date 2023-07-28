@@ -27,8 +27,10 @@ class SkeletonAnimation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: baseColor ?? Colors.grey[300]!,
-      highlightColor: highlightColor ?? Colors.grey[100]!,
+      baseColor:
+          baseColor ?? context.adaptiveTheme.solidTextColor!.withOpacity(.1),
+      highlightColor: highlightColor ??
+          context.adaptiveTheme.solidTextColor!.withOpacity(.2),
       child: child ??
           Container(
             width: width ?? double.infinity,
@@ -36,7 +38,7 @@ class SkeletonAnimation extends StatelessWidget {
             decoration: BoxDecoration(
               color: backgroundColor ??
                   context.theme.disabledColor.withOpacity(.5),
-              borderRadius: borderRadius ?? BorderRadius.circular(radius ?? 4),
+              borderRadius: borderRadius ?? BorderRadius.circular(radius ?? 16),
             ),
           ),
     );
