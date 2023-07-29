@@ -44,28 +44,36 @@ class _FlexibleSpaceState extends State<_FlexibleSpace> {
           title: Column(
             children: [
               Dimens.dp32.height,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: Icon(
-                      Icons.arrow_back_rounded,
-                      color: context.theme.scaffoldBackgroundColor,
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, CartPage.routeName);
-                    },
-                    icon: Icon(
-                      Icons.shopping_bag_rounded,
-                      color: context.theme.scaffoldBackgroundColor,
-                    ),
-                  ),
-                ],
+              BlocBuilder<ThemeBloc, ThemeState>(
+                builder: (context, theme) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: Icon(
+                          Icons.arrow_back_rounded,
+                          color: theme.theme == AppTheme.dark
+                              ? context.theme.scaffoldBackgroundColor
+                              : null,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, CartPage.routeName);
+                        },
+                        icon: Icon(
+                          Icons.shopping_bag_rounded,
+                          color: theme.theme == AppTheme.dark
+                              ? context.theme.scaffoldBackgroundColor
+                              : null,
+                        ),
+                      ),
+                    ],
+                  );
+                },
               ),
               const Spacer(),
               if (state.product != null)

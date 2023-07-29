@@ -4,6 +4,7 @@ import 'package:shamo_mobile/app/config.dart';
 import 'package:shamo_mobile/core/core.dart';
 import 'package:shamo_mobile/features/chat/chat.dart';
 import 'package:shamo_mobile/features/product/product.dart';
+import 'package:shamo_mobile/features/settings/settings.dart';
 
 part 'sections/heading_section.dart';
 part 'sections/product_section.dart';

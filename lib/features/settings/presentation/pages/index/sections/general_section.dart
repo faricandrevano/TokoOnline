@@ -32,7 +32,19 @@ class _GeneralSection extends StatelessWidget {
             ),
           );
         }),
-        _tile('Rate App'),
+        BlocBuilder<ThemeBloc, ThemeState>(
+          builder: (context, theme) {
+            return _tile('Change Theme', onTap: () {
+              context.read<ThemeBloc>().add(
+                    ThemeChanged(
+                      theme.theme == AppTheme.light
+                          ? AppTheme.dark
+                          : AppTheme.light,
+                    ),
+                  );
+            });
+          },
+        ),
       ],
     );
   }

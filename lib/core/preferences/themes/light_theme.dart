@@ -6,16 +6,16 @@ class LightTheme {
   LightTheme(this.primaryColor);
 
   final Color primaryColor;
-  static Color disabledTextColor = AppColors.white;
-  static Color secondaryColor = AppColors.white;
-  static Color disabledColor = AppColors.white;
-  static Color textSolidColor = AppColors.white;
+  static Color disabledTextColor = AppColors.grey[900]!;
+  static Color secondaryColor = AppColors.grey[900]!;
+  static Color disabledColor = AppColors.grey[900]!;
+  static Color textSolidColor = Colors.black;
   static Color errorColor = AppColors.red;
-  static Color dividerColor = AppColors.white;
-  static Color inputBackgroundColor = Colors.white;
-  static Color scaffoldColor = Colors.white;
-  static Color cardColor = Colors.white;
-  static Color appBarColor = Colors.white;
+  static Color dividerColor = AppColors.purple[500]!;
+  static Color inputBackgroundColor = AppColors.white[500]!;
+  static Color scaffoldColor = AppColors.white;
+  static Color cardColor = AppColors.white[500]!;
+  static Color appBarColor = Colors.blue;
 
   ColorScheme get scheme => ColorScheme.light(
         primary: primaryColor,
@@ -46,16 +46,13 @@ class LightTheme {
             vertical: Dimens.dp14,
             horizontal: Dimens.dp24,
           ),
-          textStyle: text.labelLarge?.copyWith(
-            color: primaryColor,
-            fontFamily: AppConfig.fontFamily,
-          ),
+          textStyle: text.labelLarge?.copyWith(color: primaryColor),
         ),
       );
 
   ElevatedButtonThemeData get elevatedButton => ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          foregroundColor: scheme.onPrimary,
+          foregroundColor: scaffoldColor,
           backgroundColor: primaryColor,
           disabledBackgroundColor: primaryColor.withOpacity(.3),
           shape: RoundedRectangleBorder(
@@ -66,10 +63,7 @@ class LightTheme {
             vertical: Dimens.dp14,
             horizontal: Dimens.dp32,
           ),
-          textStyle: text.labelLarge?.copyWith(
-            color: scheme.onPrimary,
-            fontFamily: AppConfig.fontFamily,
-          ),
+          textStyle: text.labelLarge,
         ),
       );
 
@@ -86,12 +80,13 @@ class LightTheme {
       );
 
   AppBarTheme get appBar => AppBarTheme(
-        color: appBarColor,
+        color: scaffoldColor,
+        centerTitle: true,
         titleTextStyle: text.titleLarge?.copyWith(
           fontFamily: AppConfig.fontFamily,
           color: textSolidColor,
-          fontWeight: FontWeight.w600,
-          fontSize: Dimens.dp24,
+          fontWeight: FontWeight.w500,
+          fontSize: Dimens.dp18,
         ),
         toolbarTextStyle: text.titleLarge?.copyWith(
           color: textSolidColor,
@@ -100,15 +95,15 @@ class LightTheme {
           fontSize: 16,
         ),
         surfaceTintColor: appBarColor,
-        elevation: .15,
+        elevation: 0,
         scrolledUnderElevation: .15,
         shadowColor: dividerColor.withOpacity(0.5),
         iconTheme: IconThemeData(
-          color: primaryColor,
+          color: textSolidColor,
           size: Dimens.dp24,
         ),
         actionsIconTheme: IconThemeData(
-          color: primaryColor,
+          color: textSolidColor,
           size: Dimens.dp24,
         ),
       );
@@ -117,25 +112,19 @@ class LightTheme {
         filled: true,
         fillColor: inputBackgroundColor,
         contentPadding: const EdgeInsets.symmetric(
-          vertical: Dimens.dp12,
+          vertical: Dimens.dp14,
           horizontal: Dimens.dp16,
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: primaryColor.withOpacity(.3),
-          ),
+          borderSide: BorderSide.none,
           borderRadius: BorderRadius.circular(Dimens.dp16),
         ),
         disabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: primaryColor.withOpacity(.3),
-          ),
+          borderSide: BorderSide.none,
           borderRadius: BorderRadius.circular(Dimens.dp16),
         ),
         border: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: primaryColor.withOpacity(.3),
-          ),
+          borderSide: BorderSide.none,
           borderRadius: BorderRadius.circular(Dimens.dp16),
         ),
         focusedBorder: OutlineInputBorder(
@@ -230,7 +219,7 @@ class LightTheme {
         ),
 
         labelLarge: const TextStyle(
-          fontSize: Dimens.dp18,
+          fontSize: Dimens.dp16,
           fontWeight: FontWeight.w500,
           fontFamily: AppConfig.fontFamily,
         ),
@@ -244,8 +233,12 @@ class LightTheme {
 
   FloatingActionButtonThemeData get floatingButton =>
       FloatingActionButtonThemeData(
-        backgroundColor: primaryColor,
+        backgroundColor: secondaryColor,
         elevation: 2,
+        foregroundColor: cardColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(Dimens.dp100),
+        ),
       );
 
   BottomSheetThemeData get bottomSheet => BottomSheetThemeData(
@@ -262,10 +255,17 @@ class LightTheme {
         thickness: 1,
       );
 
+  BottomAppBarTheme get bottomAppBarTheme => BottomAppBarTheme(
+        color: scaffoldColor,
+        padding: EdgeInsets.zero,
+        shape: const CircularNotchedRectangle(),
+      );
+
   ThemeData get toTheme {
     return ThemeData(
       useMaterial3: true,
       fontFamily: AppConfig.fontFamily,
+      bottomAppBarTheme: bottomAppBarTheme,
       primaryColor: primaryColor,
       scaffoldBackgroundColor: scaffoldColor,
       canvasColor: scaffoldColor,
@@ -285,6 +285,7 @@ class LightTheme {
       floatingActionButtonTheme: floatingButton,
       bottomSheetTheme: bottomSheet,
       dividerTheme: divider,
+      cardColor: cardColor,
       colorScheme: scheme.copyWith(error: errorColor),
     );
   }

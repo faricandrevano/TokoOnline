@@ -84,7 +84,8 @@ class RegularInput extends StatelessWidget {
                 TextStyle(
                   fontSize: Dimens.dp14,
                   fontWeight: FontWeight.normal,
-                  color: disabledColor ?? textColor ?? AppColors.white[500],
+                  color:
+                      disabledColor ?? textColor ?? context.theme.disabledColor,
                 ),
             keyboardType: inputType,
             enabled: enable,
