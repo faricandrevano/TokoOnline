@@ -25,7 +25,7 @@ class RoomModel extends Equatable {
       adminId: adminId,
       createdAt: createdAt,
       updateAt: updateAt,
-      admin: admin,
+      admin: admin.toEntity(),
     );
   }
 

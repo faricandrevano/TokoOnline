@@ -67,7 +67,10 @@ class _DetailChatPageState extends State<DetailChatPage> {
             return Scaffold(
               body: Scaffold(
                 appBar: AppBar(
-                  title: _HeadingSection(key: widget.key),
+                  title: _HeadingSection(
+                    key: widget.key,
+                    admin: room.room!.admin,
+                  ),
                 ),
                 body: Stack(
                   children: [

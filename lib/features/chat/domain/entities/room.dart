@@ -7,7 +7,7 @@ class Room extends Equatable {
   final String adminId;
   final DateTime createdAt;
   final DateTime updateAt;
-  final AdminModel admin;
+  final Admin admin;
 
   const Room({
     required this.id,
