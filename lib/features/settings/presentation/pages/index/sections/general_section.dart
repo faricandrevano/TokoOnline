@@ -16,7 +16,7 @@ class _GeneralSection extends StatelessWidget {
             CupertinoPageRoute(
               builder: (context) => WebViewPage(
                 appBar: AppBar(title: const Text('Privacy & Policy')),
-                url: 'https://shamo.donisaputra.com/',
+                url: 'https://shamo.donisaputra.com/privacy-policy',
               ),
             ),
           );
@@ -27,7 +27,7 @@ class _GeneralSection extends StatelessWidget {
             CupertinoPageRoute(
               builder: (context) => WebViewPage(
                 appBar: AppBar(title: const Text('Term of Service')),
-                url: 'https://shamo.donisaputra.com/',
+                url: 'https://shamo.donisaputra.com/term',
               ),
             ),
           );

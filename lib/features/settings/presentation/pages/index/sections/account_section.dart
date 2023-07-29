@@ -22,7 +22,7 @@ class _AccountSection extends StatelessWidget {
             CupertinoPageRoute(
               builder: (context) => WebViewPage(
                 appBar: AppBar(title: const Text('Help')),
-                url: 'https://shamo.donisaputra.com/',
+                url: 'https://shamo.donisaputra.com/help',
               ),
             ),
           );
