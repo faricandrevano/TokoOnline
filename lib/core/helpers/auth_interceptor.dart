@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:shamo_mobile/features/auth/auth.dart';
@@ -15,6 +17,8 @@ class AuthHttpInterceptor extends InterceptorsWrapper {
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
     final token = await authLocalSource.getData();
+
+    log('$token', name: 'TOKEN');
 
     final optionHeaders = <String, Object>{};
 

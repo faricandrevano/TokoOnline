@@ -12,6 +12,7 @@ import 'package:shamo_mobile/features/cart/cart.dart';
 import 'package:shamo_mobile/features/favorite/favorite.dart';
 import 'package:shamo_mobile/features/product/product.dart';
 import 'package:shamo_mobile/features/settings/settings.dart';
+import 'package:shamo_mobile/features/transaction/transaction.dart';
 
 final getIt = GetIt.instance;
 Future<void> setupLocator() async {
@@ -143,6 +144,31 @@ Future<void> setupLocator() async {
           getCartsUseCase: getIt(),
           incrementCartUseCase: getIt(),
         ));
+
+  // ------------------------------ Transaction ---------------------------------
+
+  // Data
+  getIt
+    ..registerLazySingleton<TransactionApiSource>(
+      () => TransactionApiSourceImpl(getIt()),
+    )
+    ..registerLazySingleton<TransactionRepository>(
+      () => TransactionRepositoryImpl(getIt()),
+    );
+
+  // Domain
+  getIt
+    ..registerLazySingleton(() => CreateTransactionUseCase(getIt()))
+    ..registerLazySingleton(() => GetTransactionsUseCase(getIt()));
+
+  // Presentation
+  getIt
+    ..registerLazySingleton(
+      () => CheckoutBloc(createTransactionUseCase: getIt()),
+    )
+    ..registerLazySingleton(
+      () => TransactionBloc(getTransactionsUseCase: getIt()),
+    );
 
   // ------------------------------ Settings ---------------------------------
 

@@ -13,7 +13,7 @@ class _ItemSection extends StatelessWidget {
         Dimens.dp8.height,
         ListView.separated(
           shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) => _buildCard(context, carts[index]),
           separatorBuilder: (context, index) => Dimens.dp8.height,
           itemCount: carts.length,
@@ -57,7 +57,7 @@ class _ItemSection extends StatelessWidget {
             ),
           ),
           Dimens.dp8.width,
-          RegularText('${cart.qty} Items')
+          RegularText('${cart.qty} Items'),
         ],
       ),
     );

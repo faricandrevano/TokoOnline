@@ -11,6 +11,7 @@ import 'package:shamo_mobile/features/cart/cart.dart';
 import 'package:shamo_mobile/features/favorite/favorite.dart';
 import 'package:shamo_mobile/features/product/product.dart';
 import 'package:shamo_mobile/features/settings/settings.dart';
+import 'package:shamo_mobile/features/transaction/transaction.dart';
 import 'package:shamo_mobile/l10n/l10n.dart';
 
 class App extends StatelessWidget {
@@ -52,6 +53,8 @@ class App extends StatelessWidget {
         BlocProvider(create: (context) => GetIt.I<FavoriteBloc>()),
         BlocProvider(create: (context) => GetIt.I<AddCartBloc>()),
         BlocProvider(create: (context) => GetIt.I<CartBloc>()),
+        BlocProvider(create: (context) => GetIt.I<CheckoutBloc>()),
+        BlocProvider(create: (context) => GetIt.I<TransactionBloc>()),
       ],
       child: const _AppWidget(),
     );

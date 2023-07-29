@@ -24,6 +24,22 @@ class SuccessCheckoutPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Icon(
+                Icons.shopping_cart_rounded,
+                size: 100,
+                color: context.theme.primaryColor,
+              ),
+              Dimens.dp8.height,
+              const SubTitleText(
+                'You made a transaction',
+                align: TextAlign.center,
+              ),
+              Dimens.dp8.height,
+              const RegularText(
+                'Stay at home while we prepare your dream shoes',
+                align: TextAlign.center,
+              ),
+              Dimens.dp8.height,
               ElevatedButton(
                 onPressed: () {
                   Navigator.pushNamedAndRemoveUntil(
