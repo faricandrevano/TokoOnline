@@ -1,13 +1,13 @@
 import 'package:equatable/equatable.dart';
-import 'package:shamo_mobile/features/product/product.dart';
+import 'package:shamo_mobile/features/transaction/transaction.dart';
 
 class Transaction extends Equatable {
   final String id;
   final String code;
   final String address;
-  final String total;
+  final int total;
   final String status;
-  final Product product;
+  final List<TransactionProduct> products;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -17,7 +17,7 @@ class Transaction extends Equatable {
     required this.address,
     required this.total,
     required this.status,
-    required this.product,
+    required this.products,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -29,7 +29,7 @@ class Transaction extends Equatable {
         address,
         total,
         status,
-        product,
+        products,
         createdAt,
         updatedAt,
       ];

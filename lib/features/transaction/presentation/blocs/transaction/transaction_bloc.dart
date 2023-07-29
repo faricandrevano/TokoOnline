@@ -14,7 +14,10 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
       (event, emit) async {
         try {
           if (event.page == 1) {
-            emit(state.copyWith(status: TransactionStateStatus.loading));
+            emit(state.copyWith(
+              status: TransactionStateStatus.loading,
+              transactions: [],
+            ));
           } else {
             emit(state.copyWith(status: TransactionStateStatus.isInfinite));
           }
@@ -35,8 +38,7 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
             (r) {
               emit(state.copyWith(
                 status: TransactionStateStatus.success,
-                transactions:
-                    event.page == 1 ? r.data : state.transactions + r.data,
+                transactions: state.transactions + r.data,
                 page: r.currentPage,
                 totalPage: r.lastPage,
               ));

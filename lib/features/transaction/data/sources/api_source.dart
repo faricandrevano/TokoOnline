@@ -55,8 +55,9 @@ class TransactionApiSourceImpl implements TransactionApiSource {
       );
     } on DioException catch (e) {
       throw e.toServerException();
-    } catch (e) {
-      throw ErrorCodeException(message: e.toString());
     }
+    //  catch (e) {
+    //   throw ErrorCodeException(message: e.toString());
+    // }
   }
 }

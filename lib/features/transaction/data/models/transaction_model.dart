@@ -1,14 +1,13 @@
 import 'package:equatable/equatable.dart';
-import 'package:shamo_mobile/features/product/product.dart';
-import 'package:shamo_mobile/features/transaction/domain/domain.dart';
+import 'package:shamo_mobile/features/transaction/transaction.dart';
 
 class TransactionModel extends Equatable {
   final String id;
   final String code;
   final String address;
-  final String total;
+  final int total;
   final String status;
-  final ProductModel product;
+  final List<TransactionProductModel> products;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -18,7 +17,7 @@ class TransactionModel extends Equatable {
     required this.address,
     required this.total,
     required this.status,
-    required this.product,
+    required this.products,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -30,7 +29,7 @@ class TransactionModel extends Equatable {
       address: address,
       total: total,
       status: status,
-      product: product.toEntity(),
+      products: products.map((e) => e.toEntity()).toList(),
       createdAt: createdAt,
       updatedAt: updatedAt,
     );
@@ -41,9 +40,11 @@ class TransactionModel extends Equatable {
         id: json['id'],
         code: json['code'],
         address: json['address'],
-        total: json['total'],
+        total: int.parse('${json['total']}'),
         status: json['status'],
-        product: ProductModel.fromJson(json['product']),
+        products: (json['products'] as List)
+            .map((e) => TransactionProductModel.fromJson(e))
+            .toList(),
         createdAt: DateTime.parse(json['created_at']),
         updatedAt: DateTime.parse(json['updated_at']),
       );
@@ -55,7 +56,7 @@ class TransactionModel extends Equatable {
         address,
         total,
         status,
-        product,
+        products,
         createdAt,
         updatedAt,
       ];

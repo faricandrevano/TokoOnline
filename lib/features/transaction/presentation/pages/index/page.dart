@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shamo_mobile/app/config.dart';
 import 'package:shamo_mobile/core/core.dart';
 import 'package:shamo_mobile/features/transaction/transaction.dart';
 
@@ -81,7 +80,8 @@ class _TransactionPageState extends State<TransactionPage> {
                           Row(
                             children: [
                               SmartNetworkImage(
-                                AppConfig.profileUrl,
+                                state.transactions[index].products.first.product
+                                    .galleries.first,
                                 width: 60,
                                 height: 60,
                                 radius: BorderRadius.circular(Dimens.dp12),
@@ -92,12 +92,18 @@ class _TransactionPageState extends State<TransactionPage> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const SubTitleText('Shoe Store'),
+                                    SubTitleText(
+                                      state.transactions[index].products
+                                          .map((e) => e.product.name)
+                                          .toList()
+                                          .join(', '),
+                                    ),
                                     RegularText.mediumSolid(
                                       context,
-                                      'Rp12,434',
+                                      state.transactions[index].total.toIDR(),
                                       style: TextStyle(
-                                          color: context.theme.primaryColor),
+                                        color: context.theme.primaryColor,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -118,17 +124,18 @@ class _TransactionPageState extends State<TransactionPage> {
                                   borderRadius:
                                       BorderRadius.circular(Dimens.dp50),
                                 ),
-                                child:
-                                    RegularText.mediumSolid(context, 'Success'),
+                                child: RegularText.mediumSolid(
+                                    context, state.transactions[index].status),
                               ),
-                              const RegularText('1 Juli 2000'),
+                              RegularText(state.transactions[index].createdAt
+                                  .toFormattedString()),
                             ],
                           ),
                         ],
                       ),
                     ),
                     separatorBuilder: (context, index) => Dimens.dp16.height,
-                    itemCount: 5,
+                    itemCount: state.transactions.length,
                   ),
               ],
               if (state.status == TransactionStateStatus.isInfinite) ...[

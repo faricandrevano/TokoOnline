@@ -7,6 +7,7 @@ class _SkeletonSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
       shrinkWrap: true,
+      padding: const EdgeInsets.all(Dimens.dp16),
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) => Container(
         padding: const EdgeInsets.symmetric(
