@@ -7,6 +7,7 @@ import 'package:shamo_mobile/app/config.dart';
 import 'package:shamo_mobile/app/route.dart';
 import 'package:shamo_mobile/core/core.dart';
 import 'package:shamo_mobile/features/auth/auth.dart';
+import 'package:shamo_mobile/features/cart/cart.dart';
 import 'package:shamo_mobile/features/favorite/favorite.dart';
 import 'package:shamo_mobile/features/product/product.dart';
 import 'package:shamo_mobile/features/settings/settings.dart';
@@ -49,6 +50,8 @@ class App extends StatelessWidget {
         BlocProvider(create: (context) => GetIt.I<ProductBloc>()),
         BlocProvider(create: (context) => GetIt.I<DetailProductBloc>()),
         BlocProvider(create: (context) => GetIt.I<FavoriteBloc>()),
+        BlocProvider(create: (context) => GetIt.I<AddCartBloc>()),
+        BlocProvider(create: (context) => GetIt.I<CartBloc>()),
       ],
       child: const _AppWidget(),
     );

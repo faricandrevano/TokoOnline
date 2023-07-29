@@ -1,14 +1,15 @@
 part of '../page.dart';
 
 class _ProductSection extends StatelessWidget {
-  const _ProductSection({super.key});
+  const _ProductSection({super.key, required this.cart});
+  final Cart cart;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         SmartNetworkImage(
-          'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/cec4b036-00b4-4c40-a40f-f3459b640fc6/revolution-6-mens-running-shoes-extra-wide-qP3nkM.png',
+          cart.product.galleries.first,
           width: 60,
           height: 60,
           fit: BoxFit.cover,
@@ -21,12 +22,12 @@ class _ProductSection extends StatelessWidget {
             children: [
               RegularText.mediumSolid(
                 context,
-                'Terrex Urban Low',
+                cart.product.name,
                 maxLine: 2,
                 overflow: TextOverflow.ellipsis,
               ),
               RegularText(
-                'Rp123,876',
+                cart.product.price.toIDR(),
                 style: TextStyle(color: context.theme.primaryColor),
               ),
             ],
@@ -37,7 +38,7 @@ class _ProductSection extends StatelessWidget {
           children: [
             _buildButton(context, isIncrement: true),
             Dimens.dp2.height,
-            RegularText.mediumSolid(context, '2'),
+            RegularText.mediumSolid(context, '${cart.qty}'),
             Dimens.dp2.height,
             _buildButton(context),
           ],
@@ -48,7 +49,13 @@ class _ProductSection extends StatelessWidget {
 
   Widget _buildButton(BuildContext context, {bool isIncrement = false}) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        if (isIncrement) {
+          context.read<CartBloc>().add(IncrementCartEvent(cart.id));
+        } else {
+          context.read<CartBloc>().add(DecrementCartEvent(cart.id));
+        }
+      },
       child: Container(
         padding: const EdgeInsets.all(Dimens.dp2),
         decoration: BoxDecoration(
@@ -57,7 +64,7 @@ class _ProductSection extends StatelessWidget {
               : context.theme.scaffoldBackgroundColor,
           shape: BoxShape.circle,
         ),
-        child: const Icon(Icons.add_rounded, size: 16),
+        child: Icon(isIncrement ? Icons.add_rounded : Icons.remove, size: 16),
       ),
     );
   }

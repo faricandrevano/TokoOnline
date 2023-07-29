@@ -1,7 +1,8 @@
 part of '../page.dart';
 
 class _ItemSection extends StatelessWidget {
-  const _ItemSection({super.key});
+  const _ItemSection({super.key, required this.carts});
+  final List<Cart> carts;
 
   @override
   Widget build(BuildContext context) {
@@ -10,16 +11,20 @@ class _ItemSection extends StatelessWidget {
       children: [
         const SubTitleText('List Items'),
         Dimens.dp8.height,
-        _buildCard(context),
-        _buildCard(context),
+        ListView.separated(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          itemBuilder: (context, index) => _buildCard(context, carts[index]),
+          separatorBuilder: (context, index) => Dimens.dp8.height,
+          itemCount: carts.length,
+        ),
       ],
     );
   }
 
-  Widget _buildCard(BuildContext context) {
+  Widget _buildCard(BuildContext context, Cart cart) {
     return Container(
       padding: const EdgeInsets.all(Dimens.dp16),
-      margin: const EdgeInsets.only(bottom: Dimens.dp8),
       decoration: BoxDecoration(
         color: context.theme.cardColor,
         borderRadius: BorderRadius.circular(Dimens.dp16),
@@ -27,7 +32,7 @@ class _ItemSection extends StatelessWidget {
       child: Row(
         children: [
           SmartNetworkImage(
-            'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/cec4b036-00b4-4c40-a40f-f3459b640fc6/revolution-6-mens-running-shoes-extra-wide-qP3nkM.png',
+            cart.product.galleries.first,
             width: 60,
             height: 60,
             fit: BoxFit.cover,
@@ -40,19 +45,19 @@ class _ItemSection extends StatelessWidget {
               children: [
                 RegularText.mediumSolid(
                   context,
-                  'Terrex Urban Low',
+                  cart.product.name,
                   maxLine: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
                 RegularText(
-                  'Rp123,876',
+                  cart.product.price.toIDR(),
                   style: TextStyle(color: context.theme.primaryColor),
                 ),
               ],
             ),
           ),
           Dimens.dp8.width,
-          const RegularText('1 Items')
+          RegularText('${cart.qty} Items')
         ],
       ),
     );

@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:shamo_mobile/core/core.dart';
 import 'package:shamo_mobile/features/cart/cart.dart';
 import 'package:shamo_mobile/features/chat/chat.dart';
@@ -97,10 +98,29 @@ class _ProductPageState extends State<ProductPage> {
                     child: const Icon(CupertinoIcons.chat_bubble_2_fill),
                   ),
                   Dimens.dp16.width,
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      child: const Text('Add to Cart'),
+                  BlocListener<AddCartBloc, AddCartState>(
+                    listener: (context, cart) {
+                      if (cart.status == AddCartStateStatus.loading) {
+                        EasyLoading.show(status: 'Loading...');
+                      } else if (cart.status == AddCartStateStatus.success) {
+                        EasyLoading.showSuccess('Cart add successfully!');
+                      } else if (cart.status == AddCartStateStatus.failure) {
+                        EasyLoading.showError(
+                          cart.failure?.message ??
+                              'Looks like something went wrong!',
+                        );
+                      }
+                    },
+                    child: Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          context.read<AddCartBloc>().add(ActionAddCartEvent(
+                                productId: widget.id,
+                                qty: 1,
+                              ));
+                        },
+                        child: const Text('Add to Cart'),
+                      ),
                     ),
                   ),
                 ],

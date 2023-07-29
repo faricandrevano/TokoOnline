@@ -8,6 +8,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:shamo_mobile/app/config.dart';
 import 'package:shamo_mobile/core/core.dart';
 import 'package:shamo_mobile/features/auth/auth.dart';
+import 'package:shamo_mobile/features/cart/cart.dart';
 import 'package:shamo_mobile/features/favorite/favorite.dart';
 import 'package:shamo_mobile/features/product/product.dart';
 import 'package:shamo_mobile/features/settings/settings.dart';
@@ -113,6 +114,35 @@ Future<void> setupLocator() async {
       getProductFavoritesUseCase: getIt(),
     ),
   );
+
+  // ------------------------------ Cart ---------------------------------
+
+  // Data
+  getIt
+    ..registerLazySingleton<CartApiSource>(
+      () => CartApiSourceImpl(getIt()),
+    )
+    ..registerLazySingleton<CartRepository>(
+      () => CartRepositoryImpl(getIt()),
+    );
+
+  // Domain
+  getIt
+    ..registerLazySingleton(() => AddCartUseCase(getIt()))
+    ..registerLazySingleton(() => GetCartsUseCase(getIt()))
+    ..registerLazySingleton(() => IncrementCartUseCase(getIt()))
+    ..registerLazySingleton(() => DecrementCartUseCase(getIt()))
+    ..registerLazySingleton(() => DeleteCartUseCase(getIt()));
+
+  // Presentation
+  getIt
+    ..registerLazySingleton(() => AddCartBloc(addCartUseCase: getIt()))
+    ..registerLazySingleton(() => CartBloc(
+          decrementCartUseCase: getIt(),
+          deleteCartUseCase: getIt(),
+          getCartsUseCase: getIt(),
+          incrementCartUseCase: getIt(),
+        ));
 
   // ------------------------------ Settings ---------------------------------
 
