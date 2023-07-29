@@ -29,7 +29,7 @@ Route<dynamic> route(RouteSettings settings) {
       );
     case DetailChatPage.routeName:
       return CupertinoPageRoute(
-        builder: (_) => const DetailChatPage(),
+        builder: (_) => DetailChatPage(id: settings.arguments as String),
         settings: settings,
       );
     case MainPage.routeName:

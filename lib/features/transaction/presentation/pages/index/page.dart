@@ -34,7 +34,7 @@ class _TransactionPageState extends State<TransactionPage> {
   void onScroll() {
     final maxScroll = controller.position.maxScrollExtent;
     final currentScroll = controller.position.pixels;
-    if (currentScroll > maxScroll - 200 && page < totalPage) {
+    if (currentScroll > maxScroll - 100 && page < totalPage) {
       getList(page + 1);
     }
   }

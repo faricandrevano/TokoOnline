@@ -1,7 +1,8 @@
 part of '../page.dart';
 
 class ProductSection extends StatelessWidget {
-  const ProductSection({super.key});
+  const ProductSection({super.key, required this.product});
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +16,7 @@ class ProductSection extends StatelessWidget {
           maxWidth: 225,
         ),
         decoration: BoxDecoration(
+          color: context.theme.scaffoldBackgroundColor,
           border: Border.all(color: context.theme.primaryColor),
           borderRadius: BorderRadius.circular(Dimens.dp16),
         ),
@@ -22,7 +24,7 @@ class ProductSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SmartNetworkImage(
-              AppConfig.profileUrl,
+              product.galleries.first,
               radius: BorderRadius.circular(Dimens.dp12),
               fit: BoxFit.cover,
             ),
@@ -31,14 +33,14 @@ class ProductSection extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const RegularText(
-                    'Court Material sdfds',
+                  RegularText(
+                    product.name,
                     maxLine: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
                   const Spacer(),
                   SubTitleText(
-                    'Rp12,534',
+                    product.price.toIDR(),
                     style: TextStyle(color: context.adaptiveTheme.primaryColor),
                   ),
                 ],
@@ -46,7 +48,9 @@ class ProductSection extends StatelessWidget {
             ),
             Dimens.dp8.width,
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                context.read<CreateRoomBloc>().add(DeleteProductRoomEvent());
+              },
               child: Icon(
                 Icons.cancel_rounded,
                 color: context.theme.primaryColor,

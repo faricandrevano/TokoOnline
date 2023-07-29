@@ -1,7 +1,8 @@
 part of '../page.dart';
 
 class _ReceiverSection extends StatelessWidget {
-  const _ReceiverSection({super.key});
+  const _ReceiverSection({super.key, required this.chat});
+  final Chat chat;
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +22,7 @@ class _ReceiverSection extends StatelessWidget {
               bottomRight: Radius.circular(Dimens.dp16),
             ),
           ),
-          child: const RegularText(
-            'Hi, This item is still available?',
-          ),
+          child: RegularText(chat.message),
         ),
       ],
     );

@@ -16,26 +16,26 @@ class PaginateParams extends Equatable {
   /// All field must be initialize and can't null value
   ///
   /// - [page] required and not nullable
-  /// - [perPage] required and not nullable
+  /// - [limit] required and not nullable
   ///
   /// Example:
   ///
   /// ```dart
   /// PaginateParams(
   ///   page: 2,
-  ///   perPage: 10,
+  ///   limit: 10,
   /// );
   /// ```
-  const PaginateParams({required this.page, required this.perPage});
+  const PaginateParams({required this.page, required this.limit});
 
   /// Page number params to send into usecase
   final int page;
 
   /// Amount of data in [page]
-  final int perPage;
+  final int limit;
 
   @override
-  List<Object?> get props => [page, perPage];
+  List<Object?> get props => [page, limit];
 }
 
 /// This params for searching data with keyword property

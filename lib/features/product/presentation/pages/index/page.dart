@@ -32,103 +32,127 @@ class _ProductPageState extends State<ProductPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: context.adaptiveTheme.solidTextColor,
-        automaticallyImplyLeading: false,
-        toolbarHeight: Dimens.height(context) / 3,
-        flexibleSpace: _FlexibleSpace(key: widget.key),
-      ),
-      backgroundColor: context.adaptiveTheme.solidTextColor,
-      body: Container(
-        padding: const EdgeInsets.only(top: Dimens.dp16),
-        decoration: BoxDecoration(
-          color: context.theme.scaffoldBackgroundColor,
-          borderRadius: const BorderRadius.vertical(
-            top: Radius.circular(Dimens.dp16),
+    return BlocBuilder<DetailProductBloc, DetailProductState>(
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(
+            backgroundColor: context.adaptiveTheme.solidTextColor,
+            automaticallyImplyLeading: false,
+            toolbarHeight: Dimens.height(context) / 3,
+            flexibleSpace: _FlexibleSpace(key: widget.key),
           ),
-        ),
-        child: ListView(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(Dimens.dp16),
-              child: _TitleSection(key: widget.key),
+          backgroundColor: context.adaptiveTheme.solidTextColor,
+          body: Container(
+            padding: const EdgeInsets.only(top: Dimens.dp16),
+            decoration: BoxDecoration(
+              color: context.theme.scaffoldBackgroundColor,
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(Dimens.dp16),
+              ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(Dimens.dp16),
-              child: _PriceSection(key: widget.key),
-            ),
-            const Padding(
-              padding: EdgeInsets.all(Dimens.dp16),
-              child: SubTitleText('Description'),
-            ),
-            BlocBuilder<DetailProductBloc, DetailProductState>(
-              builder: (context, state) {
-                if (state.status == DetailProductStateStatus.success) {
-                  return Padding(
+            child: ListView(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(Dimens.dp16),
+                  child: _TitleSection(key: widget.key),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(Dimens.dp16),
+                  child: _PriceSection(key: widget.key),
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(Dimens.dp16),
+                  child: SubTitleText('Description'),
+                ),
+                if (state.status == DetailProductStateStatus.success)
+                  Padding(
                     padding:
                         const EdgeInsets.symmetric(horizontal: Dimens.dp16),
                     child: RegularText(
                       state.product?.desc ?? '',
                       align: TextAlign.justify,
                     ),
-                  );
-                } else {
-                  return _skeleton();
-                }
-              },
-            ),
-            Dimens.dp16.height,
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: Dimens.dp16),
-              child: SubTitleText('Familiar Shoes'),
-            ),
-            _FamiliarSection(key: widget.key),
-            Padding(
-              padding: const EdgeInsets.all(Dimens.dp16),
-              child: Row(
-                children: [
-                  OutlinedButton(
-                    onPressed: () {
+                  )
+                else
+                  _skeleton(),
+                Dimens.dp16.height,
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: Dimens.dp16),
+                  child: SubTitleText('Familiar Shoes'),
+                ),
+                _FamiliarSection(key: widget.key),
+                BlocListener<CreateRoomBloc, CreateRoomState>(
+                  listener: (context, room) {
+                    if (room.status == CreateRoomStateStatus.success) {
+                      EasyLoading.dismiss();
                       Navigator.pushNamed(
                         context,
                         DetailChatPage.routeName,
+                        arguments: room.room!.id,
                       );
-                    },
-                    child: const Icon(CupertinoIcons.chat_bubble_2_fill),
-                  ),
-                  Dimens.dp16.width,
-                  BlocListener<AddCartBloc, AddCartState>(
-                    listener: (context, cart) {
-                      if (cart.status == AddCartStateStatus.loading) {
-                        EasyLoading.show(status: 'Loading...');
-                      } else if (cart.status == AddCartStateStatus.success) {
-                        EasyLoading.showSuccess('Cart add successfully!');
-                      } else if (cart.status == AddCartStateStatus.failure) {
-                        EasyLoading.showError(
-                          cart.failure?.message ??
-                              'Looks like something went wrong!',
-                        );
-                      }
-                    },
-                    child: Expanded(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          context.read<AddCartBloc>().add(ActionAddCartEvent(
-                                productId: widget.id,
-                                qty: 1,
-                              ));
-                        },
-                        child: const Text('Add to Cart'),
-                      ),
+                    } else if (room.status == CreateRoomStateStatus.failure) {
+                      EasyLoading.showError(
+                        room.failure?.message ??
+                            'Looks like something went wrong!',
+                      );
+                    } else if (room.status == CreateRoomStateStatus.loading) {
+                      EasyLoading.show(status: 'Loading...');
+                    }
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(Dimens.dp16),
+                    child: Row(
+                      children: [
+                        OutlinedButton(
+                          onPressed: () {
+                            context
+                                .read<CreateRoomBloc>()
+                                .add(ActionCreateRoomEvent(
+                                  adminId: state.product!.userId,
+                                  product: state.product,
+                                ));
+                          },
+                          child: const Icon(CupertinoIcons.chat_bubble_2_fill),
+                        ),
+                        Dimens.dp16.width,
+                        BlocListener<AddCartBloc, AddCartState>(
+                          listener: (context, cart) {
+                            if (cart.status == AddCartStateStatus.loading) {
+                              EasyLoading.show(status: 'Loading...');
+                            } else if (cart.status ==
+                                AddCartStateStatus.success) {
+                              EasyLoading.showSuccess('Cart add successfully!');
+                            } else if (cart.status ==
+                                AddCartStateStatus.failure) {
+                              EasyLoading.showError(
+                                cart.failure?.message ??
+                                    'Looks like something went wrong!',
+                              );
+                            }
+                          },
+                          child: Expanded(
+                            child: ElevatedButton(
+                              onPressed: () {
+                                context
+                                    .read<AddCartBloc>()
+                                    .add(ActionAddCartEvent(
+                                      productId: widget.id,
+                                      qty: 1,
+                                    ));
+                              },
+                              child: const Text('Add to Cart'),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 

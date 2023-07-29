@@ -9,6 +9,7 @@ import 'package:shamo_mobile/app/config.dart';
 import 'package:shamo_mobile/core/core.dart';
 import 'package:shamo_mobile/features/auth/auth.dart';
 import 'package:shamo_mobile/features/cart/cart.dart';
+import 'package:shamo_mobile/features/chat/chat.dart';
 import 'package:shamo_mobile/features/favorite/favorite.dart';
 import 'package:shamo_mobile/features/product/product.dart';
 import 'package:shamo_mobile/features/settings/settings.dart';
@@ -169,6 +170,34 @@ Future<void> setupLocator() async {
     ..registerLazySingleton(
       () => TransactionBloc(getTransactionsUseCase: getIt()),
     );
+
+  // ------------------------------ Chat ---------------------------------
+
+  // Data
+  getIt
+    ..registerLazySingleton<ChatApiSource>(
+      () => ChatApiSourceImpl(getIt()),
+    )
+    ..registerLazySingleton<ChatRepository>(
+      () => ChatRepositoryImpl(getIt()),
+    );
+
+  // Domain
+  getIt
+    ..registerLazySingleton(() => CreateRoomUseCase(getIt()))
+    ..registerLazySingleton(() => GetMessagesUseCase(getIt()))
+    ..registerLazySingleton(() => SendMessageUseCase(getIt()))
+    ..registerLazySingleton(() => GetRoomsUseCase(getIt()));
+
+  // Presentation
+  getIt
+    ..registerLazySingleton(
+      () => CreateRoomBloc(createRoomUseCase: getIt()),
+    )
+    ..registerLazySingleton(
+      () => ChatBloc(getMessagesUseCase: getIt(), sendMessageUseCase: getIt()),
+    )
+    ..registerLazySingleton(() => RoomBloc(getRoomsUseCase: getIt()));
 
   // ------------------------------ Settings ---------------------------------
 

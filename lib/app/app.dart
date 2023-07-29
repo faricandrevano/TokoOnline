@@ -8,6 +8,7 @@ import 'package:shamo_mobile/app/route.dart';
 import 'package:shamo_mobile/core/core.dart';
 import 'package:shamo_mobile/features/auth/auth.dart';
 import 'package:shamo_mobile/features/cart/cart.dart';
+import 'package:shamo_mobile/features/chat/chat.dart';
 import 'package:shamo_mobile/features/favorite/favorite.dart';
 import 'package:shamo_mobile/features/product/product.dart';
 import 'package:shamo_mobile/features/settings/settings.dart';
@@ -55,6 +56,9 @@ class App extends StatelessWidget {
         BlocProvider(create: (context) => GetIt.I<CartBloc>()),
         BlocProvider(create: (context) => GetIt.I<CheckoutBloc>()),
         BlocProvider(create: (context) => GetIt.I<TransactionBloc>()),
+        BlocProvider(create: (context) => GetIt.I<CreateRoomBloc>()),
+        BlocProvider(create: (context) => GetIt.I<RoomBloc>()),
+        BlocProvider(create: (context) => GetIt.I<ChatBloc>()),
       ],
       child: const _AppWidget(),
     );
